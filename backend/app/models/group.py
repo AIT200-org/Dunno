@@ -7,7 +7,7 @@ class Group(Base):
 	__tablename__ = "groups"
 
 	id = Column(Integer, primary_key=True, index=True)
-	name = Column(String, unique=True, nullable=False)
+	name = Column(String, unique=True, nullable=False, index=True)
 	description = Column(String, nullable=True)
 
 	# many-to-many members

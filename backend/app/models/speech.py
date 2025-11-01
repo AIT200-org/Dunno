@@ -8,12 +8,12 @@ class SpeechData(Base):
     __tablename__ = "speech_data"
 
     id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=True)
-    message_id = Column(Integer, ForeignKey("messages.id"), nullable=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=True, index=True)
+    message_id = Column(Integer, ForeignKey("messages.id"), nullable=True, index=True)
     audio_path = Column(String, nullable=False)
     duration = Column(Float, nullable=True)
-    language = Column(String, nullable=True)
-    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    language = Column(String, nullable=True, index=True)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow, index=True)
 
     user = relationship("User", back_populates="speech_data")
     message = relationship("Message", back_populates="speech")

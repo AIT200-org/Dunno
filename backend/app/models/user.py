@@ -10,7 +10,7 @@ class User(Base):
 	username = Column(String, unique=True, index=True, nullable=False)
 	email = Column(String, unique=True, index=True, nullable=False)
 	# preferred language for UI and messages
-	preferred_language = Column(String, default="en")
+	preferred_language = Column(String, default="en", index=True)
 	# whether the user wants messages auto-translated to their preferred language
 	translate_enabled = Column(Boolean, default=False)
 
