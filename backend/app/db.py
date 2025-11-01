@@ -20,3 +20,14 @@ def enable_foreign_keys(dbapi_connection, connection_record):
     cursor.close()
 
 SessionLocal = sessionmaker(bind=engine)
+
+
+def init_db():
+    """Create database tables for all models. Call this from a setup script or REPL.
+
+    This keeps table creation explicit (not automatic on import).
+    """
+    from models.base import Base
+
+    Base.metadata.create_all(bind=engine)
+
