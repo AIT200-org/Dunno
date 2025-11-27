@@ -16,9 +16,9 @@ class User(Base):
 
 	# relationships
 	groups = relationship("Group", secondary="user_groups", back_populates="members")
-	messages = relationship("Message", back_populates="owner")
-	translations = relationship("Translation", back_populates="user")
-	speech_data = relationship("SpeechData", back_populates="user")
+	messages = relationship("Message", back_populates="owner", cascade="all, delete-orphan")
+	translations = relationship("Translation", back_populates="user", cascade="all, delete-orphan")
+	speech_data = relationship("SpeechData", back_populates="user", cascade="all, delete-orphan")
 
 	def __repr__(self):
 		return f"<User(id={self.id}, username={self.username})>"

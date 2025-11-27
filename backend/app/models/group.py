@@ -12,6 +12,8 @@ class Group(Base):
 
 	# many-to-many members
 	members = relationship("User", secondary="user_groups", back_populates="groups")
+	# messages in this group
+	messages = relationship("Message", back_populates="group", cascade="all, delete-orphan")
 
 	def __repr__(self):
 		return f"<Group(id={self.id}, name={self.name})>"

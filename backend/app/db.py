@@ -27,6 +27,9 @@ def init_db():
 
     This keeps table creation explicit (not automatic on import).
     """
+    # Import the models package so all model modules register themselves
+    # with the declarative Base before creating tables.
+    import models  # noqa: F401
     from models.base import Base
 
     Base.metadata.create_all(bind=engine)

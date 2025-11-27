@@ -11,15 +11,17 @@ class Message(Base):
 	content = Column(Text, nullable=False)
 	language = Column(String, nullable=True)
 	created_at = Column(DateTime, default=datetime.datetime.utcnow, index=True)
-	owner_id = Column(Integer, ForeignKey("users.id"), index=True)
-	group_id = Column(Integer, ForeignKey("groups.id"), nullable=True, index=True)
+	owner_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+	group_id = Column(Integer, ForeignKey("groups.id", ondelete="SET NULL"), nullable=True, index=True)
 	# flag marking if message has been auto-translated
 	is_translated = Column(Boolean, default=False)
 
 	# relationships
 	owner = relationship("User", back_populates="messages")
-	translations = relationship("Translation", back_populates="message")
-	speech = relationship("SpeechData", back_populates="message")
+	translations = relationship("Translation", back_populates="message", cascade="all, delete-orphan")
+	speech = relationship("SpeechData", back_populates="message", cascade="all, delete-orphan")
+	# relationship to Group
+	group = relationship("Group", back_populates="messages")
 
 	def __repr__(self):
 		return f"<Message(id={self.id}, owner_id={self.owner_id})>"
