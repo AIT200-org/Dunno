@@ -1,7 +1,7 @@
-"""Deprecated Services package.
+"""Services package: translation, stt and message handling services."""
 
-Use `backend.app.services` (lowercase) instead. This module intentionally
-raises to avoid accidental imports from the old path.
-"""
+from .translation_service import TranslationService
+from .stt_service import SpeechToTextService
+from .message_service import MessageService
 
-raise ImportError("Deprecated module - use 'services' package")
+__all__ = ["TranslationService", "SpeechToTextService", "MessageService"]
